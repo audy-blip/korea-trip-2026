@@ -100,6 +100,19 @@
   .progress-label{font-size:.72rem; color:var(--muted); margin-top:4px; text-align:right;}
   footer{text-align:center; color:var(--muted); font-size:.76rem; margin-top:30px; padding:0 20px;}
   a{color:inherit;}
+  .music-widget{
+    position:fixed; right:16px; bottom:16px; z-index:50; display:flex; align-items:center; gap:8px;
+    background:var(--card); border:1px solid var(--line); border-radius:999px; padding:6px 14px 6px 6px;
+    box-shadow:var(--shadow);
+  }
+  .music-btn{
+    width:38px; height:38px; border-radius:50%; border:none; cursor:pointer;
+    background:linear-gradient(135deg,var(--pink),var(--pink-dark)); color:#fff; font-size:16px;
+    display:flex; align-items:center; justify-content:center; flex:0 0 auto;
+  }
+  .music-btn.playing{animation:pulse 1.4s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{transform:scale(1);} 50%{transform:scale(1.12);}}
+  .music-label{font-size:.72rem; font-weight:600; color:var(--muted); white-space:nowrap;}
 </style>
 </head>
 <body>
@@ -133,6 +146,30 @@
     <h2>🌤️ Perkiraan Cuaca (akhir Oktober)</h2>
     <div class="weather-grid" id="weatherGrid"></div>
     <div class="note-box">Estimasi berdasarkan rata-rata iklim Seoul akhir Oktober (bukan forecast harian real-time karena tanggalnya masih jauh). Umumnya kering & cerah, suhu turun tiap hari dari ~20°C ke ~16°C, malam bisa 7-10°C. Bawa jaket tipis/cardigan, dan tetap siapkan payung kecil untuk jaga-jaga.</div>
+  </div>
+
+  <div class="card">
+    <h2>🚇 Transportasi: Kartu &amp; Rute</h2>
+    <div class="shop-cat">
+      <h3>💳 Kartu MRT/Bus</h3>
+      <ul>
+        <li><b>T-money Card</b> — kartu utama buat naik subway/bus/taxi. Beli di convenience store (CU/GS25/7-Eleven) atau vending machine stasiun begitu landing di ICN, harga kartu kosong ± 2.500-4.000 KRW. Isi saldo awal ± 30.000-50.000 KRW, top up lagi di convenience store/mesin stasiun kapan aja. Sisa saldo bisa direfund (dipotong fee kecil) sebelum pulang.</li>
+        <li><b>WOWPASS / Naver Pay Tourist Card</b> — alternatif praktis, kartu yang gabungin tukar valuta + isi saldo T-money dalam satu mesin (banyak tersedia di Hongdae, Myeongdong, bandara). Cocok kalau mau sekalian tukar won tanpa ke money changer terpisah.</li>
+        <li><b>Climate Card (기후동행카드)</b> — unlimited pass 30 hari, kurang worth-it buat trip 7 hari kaya kita, jadi skip aja, pakai T-money biasa (pay-per-ride) lebih murah.</li>
+        <li>Install <b>Naver Map</b> atau <b>Kakao Map</b> buat rute real-time (Google Maps kurang akurat buat transit di Korea) — search rute dari "Dangsan Station" ke tempat tujuan tiap hari.</li>
+      </ul>
+    </div>
+    <div class="shop-cat">
+      <h3>🗺️ Rute Umum dari Hotel (Dangsan Station — Line 2 &amp; Line 9)</h3>
+      <ul>
+        <li><b>Day 2 (Hongdae/Yeonnam/Mangwon):</b> Line 2 langsung ke Hongik Univ. Station, ± 10-15 menit, gak perlu transfer.</li>
+        <li><b>Day 3 (Yongsan-gu):</b> Line 9 langsung ke Sinyongsan / Ichon Station, ± 15-20 menit, jalur paling gampang karena satu line dari hotel.</li>
+        <li><b>Day 4 (Namsan/Myeongdong/Jung-gu):</b> Line 9 atau Line 2 dengan 1x transfer ke Line 4 (turun di Myeongdong Station), ± 25-30 menit.</li>
+        <li><b>Day 5 (Jongno-gu → malam Hongdae):</b> Line 9 transfer ke Line 3 (turun di Gyeongbokgung Station), ± 30 menit; malamnya balik ke Hongdae via Line 2/3 transfer.</li>
+        <li><b>Day 6 (Seongsu → Gangnam):</b> Line 2 langsung ke Seongsu Station (± 35-40 menit), lanjut Line 2 juga ke Gangnam/COEX tanpa ganti jalur (± 15-20 menit dari Seongsu).</li>
+        <li>Tips: beli tiket single-journey di mesin kalau cuma sekali-dua kali naik, tapi tap T-money jauh lebih cepat &amp; dapat diskon transfer gratis (dalam 30 menit ganti moda gak kena charge lagi).</li>
+      </ul>
+    </div>
   </div>
 
   <div class="section-title">📅 Itinerary per Hari</div>
@@ -174,11 +211,16 @@
     <div id="packingList"></div>
   </div>
 
-  <footer>
-    Dibuat untuk trip Seoul Audy · Data tempat dari mapping "Korea Place.xlsx" · ⭐ = must-visit (highlight hijau di spreadsheet).<br>
-    Centang otomatis tersimpan di browser kamu (localStorage) selama file ini dibuka dari domain/lokasi yang sama.
-  </footer>
+  <footer></footer>
 </div>
+
+<div class="music-widget" id="musicWidget">
+  <button class="music-btn" id="musicBtn" type="button" aria-label="Play/pause backsound">
+    <span id="musicIcon">🎵</span>
+  </button>
+  <div class="music-label" id="musicLabel">BOL4 — Bom</div>
+</div>
+<div id="musicMount" style="position:fixed; width:0; height:0; overflow:hidden; pointer-events:none;"></div>
 
 <script>
 // ---------- DATA ----------
@@ -383,6 +425,31 @@ function updateProgress(){
   document.getElementById('progressLabel').textContent = done+' / '+total+' selesai ('+pct+'%)';
 }
 updateProgress();
+
+// ---------- BACKSOUND (BOL4 - Bom) ----------
+const YT_VIDEO_ID = 'AsXxuIdpkWM';
+let musicPlaying = false;
+const musicBtn = document.getElementById('musicBtn');
+const musicIcon = document.getElementById('musicIcon');
+const musicMount = document.getElementById('musicMount');
+
+function playMusic(){
+  musicMount.innerHTML = '<iframe id="ytFrame" width="1" height="1" '+
+    'src="https://www.youtube.com/embed/'+YT_VIDEO_ID+'?autoplay=1&loop=1&playlist='+YT_VIDEO_ID+'&controls=0" '+
+    'allow="autoplay" frameborder="0"></iframe>';
+  musicPlaying = true;
+  musicBtn.classList.add('playing');
+  musicIcon.textContent = '🔊';
+}
+function stopMusic(){
+  musicMount.innerHTML = '';
+  musicPlaying = false;
+  musicBtn.classList.remove('playing');
+  musicIcon.textContent = '🎵';
+}
+musicBtn.addEventListener('click', ()=>{
+  musicPlaying ? stopMusic() : playMusic();
+});
 </script>
 </body>
 </html>

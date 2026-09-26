@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seoul Trip Itinerary — 22-28 Okt 2026</title>
+<style>
+  :root{
+    --pink:#ffb6c1; --pink-dark:#ff8fa3; --mint:#a8e6cf; --mint-dark:#6fcf97;
+    --cream:#fff8f0; --ink:#3a3238; --muted:#8a7f85; --card:#ffffff;
+    --line:#f0e2e6; --gold:#f2c14e; --must:#ff5d8f;
+    --shadow: 0 4px 16px rgba(58,50,56,0.08);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:linear-gradient(180deg,#fff0f5 0%, #fff8f0 400px, #fdf6ee 100%);
+    color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Pretendard,Roboto,sans-serif;
+    line-height:1.5; padding-bottom:60px;
+  }
+  header.hero{
+    padding:32px 20px 24px; text-align:center; position:relative; overflow:hidden;
+    background: radial-gradient(circle at 20% 20%, #ffe1ea 0%, transparent 45%),
+                radial-gradient(circle at 85% 10%, #d8f5e6 0%, transparent 40%),
+                linear-gradient(135deg,#fff5f8,#f4fbf7);
+    border-bottom:1px solid var(--line);
+  }
+  header.hero h1{margin:0 0 6px; font-size:1.6rem; letter-spacing:.5px;}
+  header.hero .sub{color:var(--muted); font-size:.92rem; margin:0;}
+  header.hero .datebadge{
+    display:inline-block; margin-top:12px; padding:6px 16px; border-radius:999px;
+    background:var(--card); box-shadow:var(--shadow); font-weight:600; font-size:.85rem;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 16px;}
+  .card{
+    background:var(--card); border-radius:16px; padding:16px 18px; margin:14px 0;
+    box-shadow:var(--shadow); border:1px solid var(--line);
+  }
+  .card h2{margin:0 0 10px; font-size:1.05rem; display:flex; align-items:center; gap:8px;}
+  .flight-row{display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px dashed var(--line); font-size:.88rem;}
+  .flight-row:last-child{border-bottom:none;}
+  .flight-row .seg{font-weight:600;}
+  .flight-row .time{color:var(--pink-dark); font-weight:700;}
+  .pill-row{display:flex; gap:8px; overflow-x:auto; padding:4px 2px 10px; -webkit-overflow-scrolling:touch;}
+  .pill{
+    flex:0 0 auto; padding:8px 14px; border-radius:999px; background:var(--card);
+    border:1px solid var(--line); font-size:.82rem; font-weight:600; cursor:pointer;
+    color:var(--muted); white-space:nowrap; transition:.15s;
+  }
+  .pill.active{background:linear-gradient(135deg,var(--pink),var(--pink-dark)); color:#fff; border-color:transparent; box-shadow:0 3px 10px rgba(255,143,163,.4);}
+  .day-panel{display:none;}
+  .day-panel.active{display:block; animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);}}
+  .day-head{margin-bottom:10px;}
+  .day-head .ddate{font-size:.78rem; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:.5px;}
+  .day-head .dtitle{font-size:1.15rem; font-weight:700; margin-top:2px;}
+  .day-head .dnote{font-size:.85rem; color:var(--muted); margin-top:4px;}
+  .item{
+    display:flex; gap:10px; padding:12px 0; border-bottom:1px solid var(--line);
+  }
+  .item:last-child{border-bottom:none;}
+  .item .check{
+    flex:0 0 auto; width:22px; height:22px; border-radius:7px; border:2px solid var(--pink-dark);
+    margin-top:2px; cursor:pointer; position:relative; background:#fff;
+  }
+  .item .check.checked{background:var(--pink-dark);}
+  .item .check.checked::after{
+    content:"✓"; position:absolute; inset:0; color:#fff; font-size:14px; font-weight:800;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .item .body{flex:1; min-width:0;}
+  .item.done .ititle, .item.done .idesc{opacity:.45; text-decoration:line-through;}
+  .item .time{font-size:.72rem; font-weight:700; color:var(--pink-dark); background:#fff0f5; padding:2px 8px; border-radius:999px; display:inline-block; margin-bottom:4px;}
+  .item .ititle{font-weight:700; font-size:.96rem; margin:0 0 2px; display:flex; align-items:center; gap:6px; flex-wrap:wrap;}
+  .item .idesc{font-size:.85rem; color:#5c5259; margin:0;}
+  .item .inote{font-size:.78rem; color:var(--muted); margin-top:4px; font-style:italic;}
+  .badge{
+    font-size:.65rem; font-weight:800; padding:2px 7px; border-radius:6px; letter-spacing:.3px;
+  }
+  .badge.must{background:#ffe1ea; color:var(--must);}
+  .badge.food{background:#fff3d6; color:#a9741a;}
+  .badge.tip{background:#e3f6ea; color:#2f9e5c;}
+  .maplink{font-size:.76rem; color:#3d8bfd; text-decoration:none; margin-left:2px;}
+  .maplink:hover{text-decoration:underline;}
+  .section-title{font-size:1.05rem; font-weight:700; margin:26px 0 8px; padding:0 4px;}
+  .weather-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:8px;}
+  .wday{background:#f9fbff; border-radius:12px; padding:10px 6px; text-align:center; border:1px solid var(--line);}
+  .wday .wd{font-size:.68rem; color:var(--muted); font-weight:700;}
+  .wday .wt{font-size:.9rem; font-weight:700; margin:4px 0 2px;}
+  .wday .wl{font-size:.7rem; color:var(--muted);}
+  .note-box{background:#fff8ea; border:1px solid #f2e0ad; border-radius:12px; padding:10px 12px; font-size:.82rem; margin-top:10px; color:#7a5c00;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+  @media(max-width:480px){.grid2{grid-template-columns:1fr;} .weather-grid{grid-template-columns:repeat(4,1fr);}}
+  .shop-cat{margin-bottom:14px;}
+  .shop-cat h3{font-size:.92rem; margin:0 0 6px;}
+  .shop-cat ul{margin:0; padding-left:18px; font-size:.85rem; color:#4c4348;}
+  .shop-cat li{margin-bottom:4px;}
+  .progress-wrap{position:sticky; top:0; z-index:20; background:rgba(255,248,240,.92); backdrop-filter:blur(6px); padding:10px 16px; border-bottom:1px solid var(--line);}
+  .progress-bar{height:8px; background:#f1e4e9; border-radius:999px; overflow:hidden;}
+  .progress-fill{height:100%; background:linear-gradient(90deg,var(--pink),var(--mint-dark)); width:0%; transition:width .3s;}
+  .progress-label{font-size:.72rem; color:var(--muted); margin-top:4px; text-align:right;}
+  footer{text-align:center; color:var(--muted); font-size:.76rem; margin-top:30px; padding:0 20px;}
+  a{color:inherit;}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>🇰🇷 Seoul Trip Itinerary</h1>
+  <p class="sub">Audy's Seoul Adventure · Hotel area: Dangsan-ro 32-gil, Seoul</p>
+  <div class="datebadge">22 – 28 Oktober 2026 · 7 Hari</div>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-label" id="progressLabel">0 / 0 selesai</div>
+</div>
+
+<div class="wrap">
+
+  <div class="card" id="flightCard">
+    <h2>✈️ Info Penerbangan</h2>
+    <div class="flight-row"><span class="seg">CGK → SIN (Day 1, Kamis 22 Okt)</span><span class="time">09:25</span></div>
+    <div class="flight-row"><span class="seg">Tiba Singapore (transit)</span><span class="time">12:15</span></div>
+    <div class="flight-row"><span class="seg">Boarding SIN → ICN</span><span class="time">14:55</span></div>
+    <div class="flight-row"><span class="seg">Tiba Seoul (ICN)</span><span class="time">22:20</span></div>
+    <div class="flight-row"><span class="seg">ICN → SIN (Day 7, Rabu 28 Okt)</span><span class="time">08:50</span></div>
+    <div class="flight-row"><span class="seg">Layover Singapore</span><span class="time">16:10</span></div>
+    <div class="flight-row"><span class="seg">Tiba Jakarta (CGK)</span><span class="time">17:05</span></div>
+    <div class="note-box">💡 Jam penerbangan Day 1 aku asumsikan sama seperti sebelumnya, cuma tanggalnya geser ke 22 Oktober — kabari kalau jamnya beda. Dari ICN ke hotel (Dangsan-ro) sekitar 1 - 1.5 jam naik AREX/taxi malam hari, estimasi sampai hotel ± tengah malam. Untuk pulang, berangkat dari hotel ke ICN minimal 3-3.5 jam sebelum boarding (± jam 05.00-05.30 pagi).</div>
+  </div>
+
+  <div class="card">
+    <h2>🌤️ Perkiraan Cuaca (akhir Oktober)</h2>
+    <div class="weather-grid" id="weatherGrid"></div>
+    <div class="note-box">Estimasi berdasarkan rata-rata iklim Seoul akhir Oktober (bukan forecast harian real-time karena tanggalnya masih jauh). Umumnya kering & cerah, suhu turun tiap hari dari ~20°C ke ~16°C, malam bisa 7-10°C. Bawa jaket tipis/cardigan, dan tetap siapkan payung kecil untuk jaga-jaga.</div>
+  </div>
+
+  <div class="section-title">📅 Itinerary per Hari</div>
+  <div class="pill-row" id="dayPills"></div>
+  <div id="dayPanels"></div>
+
+  <div class="section-title">🛍️ Skincare, Oleh-Oleh &amp; Traditional Market</div>
+  <div class="card">
+    <div class="shop-cat">
+      <h3>💄 Skincare / Kosmetik</h3>
+      <ul>
+        <li><b>Olive Young</b> — cabang terbesar di <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Olive%20Young%20Myeongdong%20Flagship" target="_blank">Myeongdong (Flagship Town)</a>, buka sampai malam, banyak PB item & diskon turis (tax refund di kasir). Ada juga cabang di Hongdae &amp; Gangnam kalau mager jauh-jauh ke Myeongdong.</li>
+        <li>Brand lokal worth-buy: Anua, Torriden, Round Lab, Beauty of Joseon, Dr.G, Mediheal — semua ready di Olive Young.</li>
+        <li>Kalau habis dari klinik (Day 6), sekalian mampir Olive Young Gangnam buat cek produk pasca-treatment (sunscreen wajib!).</li>
+      </ul>
+    </div>
+    <div class="shop-cat">
+      <h3>🎁 Oleh-Oleh</h3>
+      <ul>
+        <li><b>Bricksand Financiers</b> (Yongsan) — cookies/financier kemasan cantik, cocok buat oleh-oleh kantor.</li>
+        <li><b>Seomun Market</b> (Jung-gu) — noted khusus buat oleh-oleh (snack, banchan kering, dll).</li>
+        <li><b>Lotte / Duty Free</b> — sesuai catatan trip planning kamu, bisa mampir Lotte buat oleh-oleh sebelum pulang (cek Lotte World Mall / Lotte Duty Free Myeongdong / Jamsil tergantung rute terakhir).</li>
+        <li>Convenience store (GS25/CU) juga surprisingly bagus buat oleh-oleh receh: honey butter chips, Yakult, choco snacks.</li>
+      </ul>
+    </div>
+    <div class="shop-cat">
+      <h3>🥬 Traditional Market</h3>
+      <ul>
+        <li><b>Gwangjang Market</b> (Jongno-gu) — famous Bukchon Yukhoe (beef tartare), bindaetteok.</li>
+        <li><b>Namdaemun Market</b> (Jung-gu) — pasar tradisional terbesar di Korea.</li>
+        <li><b>Mangwon Market</b> (Mapo-gu) — stuffed green chili & snow crab, lebih lokal & less touristy.</li>
+        <li><b>Goto Mall</b> (underground, dekat Express Bus Terminal) — sesuai catatan kamu, cocok buat belanja baju murah.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">🎒 Packing &amp; Prep Checklist</div>
+  <div class="card">
+    <div id="packingList"></div>
+  </div>
+
+  <footer>
+    Dibuat untuk trip Seoul Audy · Data tempat dari mapping "Korea Place.xlsx" · ⭐ = must-visit (highlight hijau di spreadsheet).<br>
+    Centang otomatis tersimpan di browser kamu (localStorage) selama file ini dibuka dari domain/lokasi yang sama.
+  </footer>
+</div>
+
+<script>
+// ---------- DATA ----------
+const weather = [
+  {d:"Kam 22", t:"20°/10°"},
+  {d:"Jum 23", t:"20°/9°"},
+  {d:"Sab 24", t:"19°/9°"},
+  {d:"Min 25", t:"18°/8°"},
+  {d:"Sen 26", t:"18°/8°"},
+  {d:"Sel 27", t:"17°/7°"},
+  {d:"Rab 28", t:"16°/7°"},
+];
+
+function maps(q){return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q+" Seoul");}
+
+const days = [
+  {
+    date:"Kamis, 22 Oktober 2026", title:"Day 1 — Kedatangan", note:"Fokus istirahat, jangan agendakan apa-apa malam ini.",
+    items:[
+      {time:"09:25", title:"Take off CGK → Singapore", desc:"Penerbangan pagi dari Jakarta.", tag:""},
+      {time:"12:15", title:"Transit Singapore (Changi)", desc:"Waktu transit sebelum boarding lanjut ke Seoul.", tag:""},
+      {time:"14:55", title:"Boarding Singapore → Seoul (ICN)", desc:"", tag:""},
+      {time:"22:20", title:"Tiba Seoul (ICN)", desc:"Imigrasi + bagasi, lanjut AREX/taxi ke hotel di Dangsan-ro.", note:"Perkirakan sampai hotel sekitar tengah malam. Siapkan T-money card / data eSIM sebelum keluar bandara.", tag:""},
+    ]
+  },
+  {
+    date:"Jumat, 23 Oktober 2026", title:"Day 2 — Hongdae, Yeonnam &amp; Mangwon (Mapo-gu)", note:"📍 Satu area besar: Hongdae → Yeonnam-dong → Mangwon-dong semuanya masih di Mapo-gu, tinggal jalan kaki 10-15 menit atau naik 1 stop subway antar tempat. Recovery day, gak perlu jauh-jauh dari hotel (±15 menit).",
+    items:[
+      {time:"Pagi", title:"Sarapan + Bagel Land ☕", desc:"Coffee/bakery di Hongdae, titik awal hari ini.", mapQ:"Bagel Land Hongdae"},
+      {time:"10:30", title:"Soonsiki Hongdae — Salon 💇", desc:"Styling / potong rambut, masih di Hongdae.", tag:"must", mapQ:"Soonsiki Hongdae"},
+      {time:"Siang", title:"Jalan kaki ±10 menit ke Yeonnam-dong: Jo &amp; Dawson 🍞", desc:"French toast yang katanya enak banget — Yeonnam nyambung jalan kaki dari Hongdae.", tag:"must", mapQ:"Jo and Dawson Yeonnam"},
+      {time:"Siang", title:"Opsional: Coffee Nap Roasters / Luna Pie", desc:"Cafe & dessert lain di Yeonnam-dong, masih satu kawasan jalan kaki.", mapQ:"Coffee Nap Roasters Yeonnam"},
+      {time:"Sore", title:"Lanjut ke Mangwon Market — Snow Crab 🦀", desc:"Mangwon-dong nempel sama Yeonnam-dong (Mapo-gu juga), stuffed green chili & snow crab — ini spot snowcrab yang match request kamu.", tag:"must", mapQ:"Mangwon Market"},
+      {time:"Malam", title:"Balik ke Hongdae, Dinner: Hongs Zzuggumi 🐙", desc:"Seafood/octopus (nakji) terkenal, dekat titik awal tadi.", tag:"must", mapQ:"Hongs Zzuggumi Hongdae"},
+      {time:"Opsional", title:"Hyundai Mall (Yeongdeungpo) 🛍️", desc:"Paling deket hotel (10-20 menit) — mampir kalau masih ada tenaga pas balik ke hotel malam ini.", tag:"must", mapQ:"Hyundai Department Store Yeongdeungpo"},
+    ]
+  },
+  {
+    date:"Sabtu, 24 Oktober 2026", title:"Day 3 — Yongsan-gu (satu area penuh)", note:"📍 Semua di Yongsan-gu, saling berdekatan / walkable dari Ichon-Sinyongsan-HBC area. Weekend Day 1, ±25 menit dari hotel.",
+    items:[
+      {time:"10:00", title:"Piknik di Nodeul Island (Han River) 🧺", desc:"Spot picnic Han River yang recommended di list kamu — bawa tikar & snack.", tag:"must", mapQ:"Nodeul Island"},
+      {time:"Siang", title:"HYBE Building (foto-foto) 🎤", desc:"⚠️ HYBE INSIGHT museum sudah tutup permanen sejak Jan 2023, jadi tidak bisa masuk/beli tiket lagi. Tetap bisa foto di depan gedungnya (42 Hangang-daero, dekat Sinyongsan Station exit 2) — masih satu area Yongsan.", mapQ:"HYBE Building Yongsan"},
+      {time:"14:30", title:"Rain Report ☕", desc:"Cafe di Yongsan, sekalian istirahat sebelum antri BBQ.", mapQ:"Rain Report Yongsan"},
+      {time:"15:00", title:"Mulai antri Mongtan BBQ 🥩", desc:"#1 BBQ Seoul versi list kamu, masih di Yongsan. Realistis nunggu 1.5-3 jam — daftar antrian dulu sebelum jalan-jalan sekitar.", tag:"must", mapQ:"Mongtan Yongsan"},
+      {time:"18:00", title:"Dinner Mongtan BBQ", desc:"Makan malam setelah antri.", mapQ:"Mongtan Yongsan"},
+      {time:"Opsional", title:"Bricksand Financiers 🍪", desc:"Bread/oleh-oleh, masih Yongsan, searah pulang.", mapQ:"Bricksand Financiers"},
+    ]
+  },
+  {
+    date:"Minggu, 25 Oktober 2026", title:"Day 4 — Jung-gu: Namsan, Myeongdong &amp; Namdaemun", note:"📍 Namsan, Myeongdong, Namdaemun Market, Seomun Market semuanya di Jung-gu, saling nempel & walkable/1 stop subway. Weekend Day 2, ±20-30 menit dari hotel.",
+    items:[
+      {time:"08:30", title:"Namsan Tower (N Seoul Tower) 🗼", desc:"Pergi pagi supaya tidak antri (cable car buka 10:00). View kota Seoul paling adem pagi hari.", tag:"must", mapQ:"N Seoul Tower"},
+      {time:"Siang", title:"Turun ke Myeongdong: Myeongdong Kyoja 🍜", desc:"Noodle Michelin Guide, jalan kaki/short bus dari kaki Namsan.", tag:"must", mapQ:"Myeongdong Kyoja"},
+      {time:"Sore", title:"Olive Young Myeongdong Flagship 💄", desc:"Belanja skincare, masih di Myeongdong, banyak promo turis + tax refund.", mapQ:"Olive Young Myeongdong"},
+      {time:"Sore", title:"Namdaemun Market 🛒", desc:"Pasar tradisional terbesar di Korea, nempel Myeongdong.", mapQ:"Namdaemun Market"},
+      {time:"Sore", title:"Seomun Market 🎁", desc:"Sama-sama di Jung-gu, khusus buat oleh-oleh.", mapQ:"Seomun Market"},
+    ]
+  },
+  {
+    date:"Senin, 26 Oktober 2026", title:"Day 5 — Jongno-gu (siang) + Hongdae malam", note:"📍 Gyeongbokgung, Bukchon, Gwangjang Market, London Bagel Museum semua di Jongno-gu, berdekatan jalan kaki. Malamnya baru pindah ke Hongdae — satu-satunya cross-area hari ini karena temanmu baru landing & request clubbing Senin malam.",
+    items:[
+      {time:"09:30", title:"Gyeongbokgung Palace 🏯", desc:"Changing of the Guard ceremony jam 10:00 &amp; 14:00 (tutup tiap hari Selasa).", tag:"must", mapQ:"Gyeongbokgung Palace"},
+      {time:"Siang", title:"Bukchon Hanok Village", desc:"Housing scenery, jalan kaki dari Gyeongbokgung, masih Jongno-gu.", mapQ:"Bukchon Hanok Village"},
+      {time:"Siang", title:"Cafe Onion ☕", desc:"Charcoal bread & muscat croissant, masih satu area.", tag:"must", mapQ:"Cafe Onion Anguk"},
+      {time:"Sore", title:"Gwangjang Market 🥢", desc:"Traditional market, coba Bukchon Yukhoe (beef tartare).", mapQ:"Gwangjang Market"},
+      {time:"Sore", title:"London Bagel Museum 🥯", desc:"Bagel super hits, biasanya antri — masih Jongno-gu, penutup hari sebelum balik ganti baju.", tag:"must", mapQ:"London Bagel Museum Anguk"},
+      {time:"22:00", title:"Hongdae Night Club (free entry, tourist-friendly) 🎶", desc:"Temanmu baru landing hari ini — ketemuan & clubbing di Hongdae.", mapQ:"Hongdae Club Street"},
+    ]
+  },
+  {
+    date:"Selasa, 27 Oktober 2026", title:"Day 6 — Seongsu-dong → Gangnam-gu (1 jalur Line 2)", note:"📍 Seongsu & Gangnam sama-sama dilewati subway Line 2, cuma ±15-20 menit — masih satu 'jalur' meski beda gu, jadi gak perlu bolak-balik jauh.",
+    items:[
+      {time:"Pagi", title:"Seoul Forest 🌳", desc:"Jalan santai pagi hari di Seongsu.", mapQ:"Seoul Forest"},
+      {time:"Pagi", title:"Jayeondo Salted Bread 🥐", desc:"Salt bread trend, katanya gak seantri cabang lain, masih Seongsu.", tag:"must", mapQ:"Jayeondo Salted Bread Seongsu"},
+      {time:"Siang", title:"Hanjungsun (dessert) 🍨", desc:"Mochi & corn gelato, masih di Seongsu-dong.", mapQ:"Hanjungsun Seongsu"},
+      {time:"13:30", title:"Naik Line 2 ke Gangnam (±15-20 menit)", desc:"Langsung tanpa ganti jalur, satu kali naik subway.", tag:""},
+      {time:"14:00", title:"Starfield Library (COEX Mall) 📚", desc:"Perpustakaan paling terkenal & instagramable di Seoul.", tag:"must", mapQ:"Starfield Library COEX"},
+      {time:"Sore", title:"Nu-Dake / Cafe Kitsune ☕", desc:"Dua cafe hits di Gangnam, masih satu area COEX.", tag:"must", mapQ:"Nu-Dake Gangnam"},
+      {time:"16:30", title:"Reone Clinic — DNA Salmon / Pico Laser 💉", desc:"Klinik paling direkomendasikan di list kamu, bisa pakai anestesi. Booking dulu sebelum datang.", tag:"must", mapQ:"Reone Clinic Gangnam"},
+      {time:"Malam", title:"Dinner: Sam Yuk Ga (Pork BBQ)", desc:"BBQ babi di Gangnam, penutup hari terakhir jalan-jalan. Mulai packing untuk pulang besok pagi-pagi buta.", mapQ:"Sam Yuk Ga Gangnam"},
+    ]
+  },
+  {
+    date:"Rabu, 28 Oktober 2026", title:"Day 7 — Kepulangan", note:"Bangun subuh, ke bandara pagi-pagi.",
+    items:[
+      {time:"05:00", title:"Checkout hotel & ke ICN", desc:"Perjalanan hotel → ICN ± 1-1.5 jam, tambah buffer untuk check-in & imigrasi.", note:""},
+      {time:"08:50", title:"Take off ICN → Singapore", desc:""},
+      {time:"16:10", title:"Layover Singapore", desc:""},
+      {time:"17:05", title:"Tiba Jakarta (CGK)", desc:"Selamat sampai rumah!"},
+    ]
+  },
+];
+
+const packingItems = [
+  "Jaket tipis / cardigan untuk malam hari (suhu bisa turun ke 7-10°C)",
+  "Sepatu jalan yang nyaman (banyak jalan kaki + naik turun subway)",
+  "Payung kecil / rain jacket (jaga-jaga meski Oktober akhir cenderung kering)",
+  "T-money card atau siapkan e-money di aplikasi (bisa beli di CU/GS25/bandara)",
+  "eSIM / pocket wifi Korea",
+  "Sunscreen (wajib setelah treatment klinik hari ke-6)",
+  "Hand cream / lip balm (udara gugur cenderung kering)",
+  "Colokan: Korea 220V tipe C/F — sama dengan Indonesia, tapi cek kondisi charger",
+  "Cash KRW secukupnya + kartu debit/travel card",
+  "Reservasi klinik (Reone Clinic) & cek jadwal antrian Mongtan sebelum berangkat",
+];
+
+// ---------- STORAGE ----------
+let store = {};
+try{ store = JSON.parse(localStorage.getItem('seoulTripChecklist')||'{}'); }catch(e){ store = {}; }
+function save(){ try{ localStorage.setItem('seoulTripChecklist', JSON.stringify(store)); }catch(e){} }
+
+// ---------- RENDER ----------
+const pillsEl = document.getElementById('dayPills');
+const panelsEl = document.getElementById('dayPanels');
+
+days.forEach((day, di)=>{
+  const pill = document.createElement('div');
+  pill.className = 'pill'+(di===0?' active':'');
+  pill.textContent = 'Day '+(di+1);
+  pill.onclick = ()=>selectDay(di);
+  pillsEl.appendChild(pill);
+
+  const panel = document.createElement('div');
+  panel.className = 'day-panel'+(di===0?' active':'');
+  panel.id = 'panel-'+di;
+
+  let itemsHtml = '';
+  day.items.forEach((it, ii)=>{
+    const id = 'd'+di+'-i'+ii;
+    const checked = !!store[id];
+    const badge = it.tag==='must' ? '<span class="badge must">⭐ must-visit</span>' : '';
+    const mapHtml = it.mapQ ? '<a class="maplink" target="_blank" href="'+maps(it.mapQ)+'">📍 map</a>' : '';
+    itemsHtml += '<div class="item'+(checked?' done':'')+'" id="item-'+id+'">'+
+      '<div class="check'+(checked?' checked':'')+'" data-id="'+id+'"></div>'+
+      '<div class="body">'+
+        (it.time?'<span class="time">'+it.time+'</span>':'')+
+        '<p class="ititle">'+it.title+' '+badge+'</p>'+
+        (it.desc?'<p class="idesc">'+it.desc+' '+mapHtml+'</p>':'<p class="idesc">'+mapHtml+'</p>')+
+        (it.note?'<p class="inote">'+it.note+'</p>':'')+
+      '</div></div>';
+  });
+
+  panel.innerHTML = '<div class="card">'+
+    '<div class="day-head"><div class="ddate">'+day.date+'</div><div class="dtitle">'+day.title+'</div><div class="dnote">'+day.note+'</div></div>'+
+    itemsHtml+
+    '</div>';
+  panelsEl.appendChild(panel);
+});
+
+function selectDay(idx){
+  document.querySelectorAll('.pill').forEach((p,i)=>p.classList.toggle('active', i===idx));
+  document.querySelectorAll('.day-panel').forEach((p,i)=>p.classList.toggle('active', i===idx));
+}
+
+panelsEl.addEventListener('click', (e)=>{
+  const box = e.target.closest('.check');
+  if(!box) return;
+  const id = box.dataset.id;
+  store[id] = !store[id];
+  box.classList.toggle('checked', store[id]);
+  box.closest('.item').classList.toggle('done', store[id]);
+  save();
+  updateProgress();
+});
+
+// packing list render
+const packWrap = document.getElementById('packingList');
+packingItems.forEach((txt, i)=>{
+  const id = 'pack-'+i;
+  const checked = !!store[id];
+  const row = document.createElement('div');
+  row.className = 'item'+(checked?' done':'');
+  row.innerHTML = '<div class="check'+(checked?' checked':'')+'" data-id="'+id+'"></div>'+
+    '<div class="body"><p class="idesc" style="font-weight:600; color:var(--ink);">'+txt+'</p></div>';
+  packWrap.appendChild(row);
+});
+packWrap.addEventListener('click', (e)=>{
+  const box = e.target.closest('.check');
+  if(!box) return;
+  const id = box.dataset.id;
+  store[id] = !store[id];
+  box.classList.toggle('checked', store[id]);
+  box.closest('.item').classList.toggle('done', store[id]);
+  save();
+  updateProgress();
+});
+
+// weather render
+const wGrid = document.getElementById('weatherGrid');
+weather.forEach(w=>{
+  const el = document.createElement('div');
+  el.className = 'wday';
+  el.innerHTML = '<div class="wd">'+w.d+'</div><div class="wt">'+w.t.split('/')[0]+'</div><div class="wl">'+w.t.split('/')[1]+'</div>';
+  wGrid.appendChild(el);
+});
+
+function updateProgress(){
+  const total = days.reduce((a,d)=>a+d.items.length,0) + packingItems.length;
+  const done = Object.values(store).filter(Boolean).length;
+  const pct = total ? Math.round(done/total*100) : 0;
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressLabel').textContent = done+' / '+total+' selesai ('+pct+'%)';
+}
+updateProgress();
+</script>
+</body>
+</html>

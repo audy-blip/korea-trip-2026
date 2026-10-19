@@ -163,9 +163,9 @@
       <h3>🗺️ Rute Umum dari Hotel (Dangsan Station — Line 2 &amp; Line 9)</h3>
       <ul>
         <li><b>Day 2 (Hongdae/Yeonnam/Mangwon):</b> Line 2 langsung ke Hongik Univ. Station, ± 10-15 menit, gak perlu transfer.</li>
-        <li><b>Day 3 (Yongsan-gu):</b> Line 9 langsung ke Sinyongsan / Ichon Station, ± 15-20 menit, jalur paling gampang karena satu line dari hotel.</li>
-        <li><b>Day 4 (Namsan/Myeongdong/Jung-gu):</b> Line 9 atau Line 2 dengan 1x transfer ke Line 4 (turun di Myeongdong Station), ± 25-30 menit.</li>
-        <li><b>Day 5 (Jongno-gu → malam Hongdae):</b> Line 9 transfer ke Line 3 (turun di Gyeongbokgung Station), ± 30 menit; malamnya balik ke Hongdae via Line 2/3 transfer.</li>
+        <li><b>Day 3 (Olympic Park → Yongsan → Namsan):</b> Olympic Park paling jauh, jadi berangkat pagi — cek rute terbaik di Naver Map (± 45-60 menit dari hotel). Lanjut ke Yongsan (Sinyongsan / Ichon Station, Line 4 / Line 1), lalu ke Namsan sore-malam.</li>
+        <li><b>Day 4 (Hyundai + Myeongdong/Jung-gu):</b> Hyundai paling deket hotel (± 10-20 menit), lanjut ke Myeongdong via Line 4 dengan 1x transfer, ± 25-30 menit dari hotel.</li>
+        <li><b>Day 5 (Jongno-gu → balik hotel → malam Hongdae):</b> Line 9 transfer ke Line 3 (turun di Gyeongbokgung Station), ± 30 menit; sore balik ke hotel dulu, malamnya ke Hongdae via Line 2 (± 10-15 menit).</li>
         <li><b>Day 6 (Seongsu → Gangnam):</b> Line 2 langsung ke Seongsu Station (± 35-40 menit), lanjut Line 2 juga ke Gangnam/COEX tanpa ganti jalur (± 15-20 menit dari Seongsu).</li>
         <li>Tips: beli tiket single-journey di mesin kalau cuma sekali-dua kali naik, tapi tap T-money jauh lebih cepat &amp; dapat diskon transfer gratis (dalam 30 menit ganti moda gak kena charge lagi).</li>
       </ul>
@@ -189,7 +189,6 @@
     <div class="shop-cat">
       <h3>🎁 Oleh-Oleh</h3>
       <ul>
-        <li><b>Bricksand Financiers</b> (Yongsan) — cookies/financier kemasan cantik, cocok buat oleh-oleh kantor.</li>
         <li><b>Seomun Market</b> (Jung-gu) — noted khusus buat oleh-oleh (snack, banchan kering, dll).</li>
         <li><b>Lotte / Duty Free</b> — sesuai catatan trip planning kamu, bisa mampir Lotte buat oleh-oleh sebelum pulang (cek Lotte World Mall / Lotte Duty Free Myeongdong / Jamsil tergantung rute terakhir).</li>
         <li>Convenience store (GS25/CU) juga surprisingly bagus buat oleh-oleh receh: honey butter chips, Yakult, choco snacks.</li>
@@ -249,45 +248,42 @@ const days = [
   {
     date:"Jumat, 23 Oktober 2026", title:"Day 2 — Hongdae, Yeonnam &amp; Mangwon (Mapo-gu)", note:"📍 Satu area besar: Hongdae → Yeonnam-dong → Mangwon-dong semuanya masih di Mapo-gu, tinggal jalan kaki 10-15 menit atau naik 1 stop subway antar tempat. Recovery day, gak perlu jauh-jauh dari hotel (±15 menit).",
     items:[
-      {time:"Pagi", title:"Sarapan + Bagel Land ☕", desc:"Coffee/bakery di Hongdae, titik awal hari ini.", mapQ:"Bagel Land Hongdae"},
-      {time:"10:30", title:"Soonsiki Hongdae — Salon 💇", desc:"Styling / potong rambut, masih di Hongdae.", tag:"must", mapQ:"Soonsiki Hongdae"},
-      {time:"Siang", title:"Jalan kaki ±10 menit ke Yeonnam-dong: Jo &amp; Dawson 🍞", desc:"French toast yang katanya enak banget — Yeonnam nyambung jalan kaki dari Hongdae.", tag:"must", mapQ:"Jo and Dawson Yeonnam"},
-      {time:"Siang", title:"Opsional: Coffee Nap Roasters / Luna Pie", desc:"Cafe & dessert lain di Yeonnam-dong, masih satu kawasan jalan kaki.", mapQ:"Coffee Nap Roasters Yeonnam"},
-      {time:"Sore", title:"Lanjut ke Mangwon Market — Snow Crab 🦀", desc:"Mangwon-dong nempel sama Yeonnam-dong (Mapo-gu juga), stuffed green chili & snow crab — ini spot snowcrab yang match request kamu.", tag:"must", mapQ:"Mangwon Market"},
-      {time:"Malam", title:"Balik ke Hongdae, Dinner: Hongs Zzuggumi 🐙", desc:"Seafood/octopus (nakji) terkenal, dekat titik awal tadi.", tag:"must", mapQ:"Hongs Zzuggumi Hongdae"},
-      {time:"Opsional", title:"Hyundai Mall (Yeongdeungpo) 🛍️", desc:"Paling deket hotel (10-20 menit) — mampir kalau masih ada tenaga pas balik ke hotel malam ini.", tag:"must", mapQ:"Hyundai Department Store Yeongdeungpo"},
+      {time:"Pagi", title:"Sarapan: Jo &amp; Dawson 🍞", desc:"French toast yang katanya enak banget — breakfast di Yeonnam-dong, titik awal hari ini.", tag:"must", mapQ:"Jo and Dawson Yeonnam"},
+      {time:"10:30", title:"Soonsiki Hongdae — Salon 💇", desc:"Styling / potong rambut, jalan kaki ±10 menit dari Yeonnam ke Hongdae.", tag:"must", mapQ:"Soonsiki Hongdae"},
+      {time:"Siang", title:"Lunch: Hongs Zzuggumi 🐙", desc:"Seafood/octopus (nakji) terkenal, dekat salon di Hongdae.", tag:"must", mapQ:"Hongs Zzuggumi Hongdae"},
+      {time:"Sore", title:"Opsional: Coffee Nap Roasters / Luna Pie", desc:"Cafe & dessert lain di Yeonnam-dong, masih satu kawasan jalan kaki.", mapQ:"Coffee Nap Roasters Yeonnam"},
+      {time:"Malam", title:"Dinner: Mangwon Market — Snow Crab 🦀", desc:"Mangwon-dong nempel sama Yeonnam-dong (Mapo-gu juga), stuffed green chili & snow crab — ini spot snowcrab yang match request kamu.", tag:"must", mapQ:"Mangwon Market"},
     ]
   },
   {
-    date:"Sabtu, 24 Oktober 2026", title:"Day 3 — Yongsan-gu (satu area penuh)", note:"📍 Semua di Yongsan-gu, saling berdekatan / walkable dari Ichon-Sinyongsan-HBC area. Weekend Day 1, ±25 menit dari hotel.",
+    date:"Sabtu, 24 Oktober 2026", title:"Day 3 — Olympic Park, Yongsan &amp; Namsan", note:"📍 Mulai dari Olympic Park (Songpa-gu) pagi hari, lalu pindah ke Yongsan-gu, ditutup piknik sunset di Han River dan night view Namsan Tower. Weekend Day 1.",
     items:[
-      {time:"10:00", title:"Piknik di Nodeul Island (Han River) 🧺", desc:"Spot picnic Han River yang recommended di list kamu — bawa tikar & snack.", tag:"must", mapQ:"Nodeul Island"},
-      {time:"Siang", title:"HYBE Building (foto-foto) 🎤", desc:"⚠️ HYBE INSIGHT museum sudah tutup permanen sejak Jan 2023, jadi tidak bisa masuk/beli tiket lagi. Tetap bisa foto di depan gedungnya (42 Hangang-daero, dekat Sinyongsan Station exit 2) — masih satu area Yongsan.", mapQ:"HYBE Building Yongsan"},
-      {time:"14:30", title:"Rain Report ☕", desc:"Cafe di Yongsan, sekalian istirahat sebelum antri BBQ.", mapQ:"Rain Report Yongsan"},
-      {time:"15:00", title:"Mulai antri Mongtan BBQ 🥩", desc:"#1 BBQ Seoul versi list kamu, masih di Yongsan. Realistis nunggu 1.5-3 jam — daftar antrian dulu sebelum jalan-jalan sekitar.", tag:"must", mapQ:"Mongtan Yongsan"},
-      {time:"18:00", title:"Dinner Mongtan BBQ", desc:"Makan malam setelah antri.", mapQ:"Mongtan Yongsan"},
-      {time:"Opsional", title:"Bricksand Financiers 🍪", desc:"Bread/oleh-oleh, masih Yongsan, searah pulang.", mapQ:"Bricksand Financiers"},
+      {time:"09:30", title:"Olympic Park 🌳", desc:"Taman besar di Songpa-gu, jalan santai pagi hari sebelum pindah ke Yongsan.", tag:"must", mapQ:"Olympic Park"},
+      {time:"13:30", title:"HYBE Building (foto-foto) 🎤", desc:"⚠️ HYBE INSIGHT museum sudah tutup permanen sejak Jan 2023, jadi tidak bisa masuk/beli tiket lagi. Tetap bisa foto di depan gedungnya (42 Hangang-daero, dekat Sinyongsan Station exit 2) — masih satu area Yongsan.", mapQ:"HYBE Building Yongsan"},
+      {time:"16:45", title:"Piknik Sunset di Nodeul Island (Han River) 🧺🍜", desc:"Datang ±1 jam sebelum sunset (sekitar 17:45) supaya dapat spot bagus. Bawa tikar & snack, sekalian makan ramyeon cup dari convenience store sambil nunggu matahari terbenam.", tag:"must", mapQ:"Nodeul Island"},
+      {time:"19:00", title:"Namsan Tower (N Seoul Tower) 🗼", desc:"Night view kota Seoul setelah sunset. Cek jam terakhir cable car di Naver/Kakao Map sebelum naik.", tag:"must", mapQ:"N Seoul Tower"},
     ]
   },
   {
-    date:"Minggu, 25 Oktober 2026", title:"Day 4 — Jung-gu: Namsan, Myeongdong &amp; Namdaemun", note:"📍 Namsan, Myeongdong, Namdaemun Market, Seomun Market semuanya di Jung-gu, saling nempel & walkable/1 stop subway. Weekend Day 2, ±20-30 menit dari hotel.",
+    date:"Minggu, 25 Oktober 2026", title:"Day 4 — Hyundai, Myeongdong &amp; Namdaemun", note:"📍 Hyundai dibuat jadi main agenda hari ini (bisa seharian). Myeongdong, Namdaemun Market, Seomun Market semuanya di Jung-gu, saling nempel & walkable/1 stop subway — ambil sesuai tenaga. Weekend Day 2.",
     items:[
-      {time:"08:30", title:"Namsan Tower (N Seoul Tower) 🗼", desc:"Pergi pagi supaya tidak antri (cable car buka 10:00). View kota Seoul paling adem pagi hari.", tag:"must", mapQ:"N Seoul Tower"},
-      {time:"Siang", title:"Turun ke Myeongdong: Myeongdong Kyoja 🍜", desc:"Noodle Michelin Guide, jalan kaki/short bus dari kaki Namsan.", tag:"must", mapQ:"Myeongdong Kyoja"},
+      {time:"10:30", title:"Hyundai Mall (Yeongdeungpo) 🛍️", desc:"Paling deket hotel (10-20 menit). Bisa seharian: belanja, makan siang di food court, dan istirahat di cafe/lounge di dalam.", tag:"must", mapQ:"Hyundai Department Store Yeongdeungpo"},
+      {time:"Sore", title:"Myeongdong Kyoja 🍜", desc:"Noodle Michelin Guide di Myeongdong — kalau masih kuat lanjut dari Hyundai.", tag:"must", mapQ:"Myeongdong Kyoja"},
       {time:"Sore", title:"Olive Young Myeongdong Flagship 💄", desc:"Belanja skincare, masih di Myeongdong, banyak promo turis + tax refund.", mapQ:"Olive Young Myeongdong"},
       {time:"Sore", title:"Namdaemun Market 🛒", desc:"Pasar tradisional terbesar di Korea, nempel Myeongdong.", mapQ:"Namdaemun Market"},
       {time:"Sore", title:"Seomun Market 🎁", desc:"Sama-sama di Jung-gu, khusus buat oleh-oleh.", mapQ:"Seomun Market"},
     ]
   },
   {
-    date:"Senin, 26 Oktober 2026", title:"Day 5 — Jongno-gu (siang) + Hongdae malam", note:"📍 Gyeongbokgung, Bukchon, Gwangjang Market, London Bagel Museum semua di Jongno-gu, berdekatan jalan kaki. Malamnya baru pindah ke Hongdae — satu-satunya cross-area hari ini karena temanmu baru landing & request clubbing Senin malam.",
+    date:"Senin, 26 Oktober 2026", title:"Day 5 — Jongno-gu (siang) + Hongdae malam", note:"📍 Gyeongbokgung, Bukchon, Gwangjang Market, London Bagel Museum semua di Jongno-gu, berdekatan jalan kaki. Sore balik ke hotel dulu buat istirahat & ganti baju, malamnya baru ke Hongdae karena temanmu baru landing & request clubbing Senin malam.",
     items:[
       {time:"09:30", title:"Gyeongbokgung Palace 🏯", desc:"Changing of the Guard ceremony jam 10:00 &amp; 14:00 (tutup tiap hari Selasa).", tag:"must", mapQ:"Gyeongbokgung Palace"},
       {time:"Siang", title:"Bukchon Hanok Village", desc:"Housing scenery, jalan kaki dari Gyeongbokgung, masih Jongno-gu.", mapQ:"Bukchon Hanok Village"},
       {time:"Siang", title:"Cafe Onion ☕", desc:"Charcoal bread & muscat croissant, masih satu area.", tag:"must", mapQ:"Cafe Onion Anguk"},
       {time:"Sore", title:"Gwangjang Market 🥢", desc:"Traditional market, coba Bukchon Yukhoe (beef tartare).", mapQ:"Gwangjang Market"},
-      {time:"Sore", title:"London Bagel Museum 🥯", desc:"Bagel super hits, biasanya antri — masih Jongno-gu, penutup hari sebelum balik ganti baju.", tag:"must", mapQ:"London Bagel Museum Anguk"},
-      {time:"22:00", title:"Hongdae Night Club (free entry, tourist-friendly) 🎶", desc:"Temanmu baru landing hari ini — ketemuan & clubbing di Hongdae.", mapQ:"Hongdae Club Street"},
+      {time:"Sore", title:"London Bagel Museum 🥯", desc:"Bagel super hits, biasanya antri — masih Jongno-gu, penutup jalan-jalan hari ini sebelum balik ke hotel.", tag:"must", mapQ:"London Bagel Museum Anguk"},
+      {time:"Sore", title:"Balik ke hotel dulu 🏨", desc:"Istirahat, mandi & ganti baju sebelum clubbing. Dari Jongno-gu ke Dangsan ± 30 menit.", note:"Sekalian charge HP & siapkan ID/paspor buat masuk club."},
+      {time:"22:00", title:"Hongdae Night Club (free entry, tourist-friendly) 🎶", desc:"Temanmu baru landing hari ini — ketemuan & clubbing di Hongdae (± 10-15 menit dari hotel via Line 2).", mapQ:"Hongdae Club Street"},
     ]
   },
   {
@@ -295,6 +291,7 @@ const days = [
     items:[
       {time:"Pagi", title:"Seoul Forest 🌳", desc:"Jalan santai pagi hari di Seongsu.", mapQ:"Seoul Forest"},
       {time:"Pagi", title:"Jayeondo Salted Bread 🥐", desc:"Salt bread trend, katanya gak seantri cabang lain, masih Seongsu.", tag:"must", mapQ:"Jayeondo Salted Bread Seongsu"},
+      {time:"Siang", title:"Blue Elephant 🐘", desc:"Spot di Seongsu-dong, masuk ke jam Seongsu sebelum lanjut dessert.", tag:"must", mapQ:"Blue Elephant Seongsu"},
       {time:"Siang", title:"Hanjungsun (dessert) 🍨", desc:"Mochi & corn gelato, masih di Seongsu-dong.", mapQ:"Hanjungsun Seongsu"},
       {time:"13:30", title:"Naik Line 2 ke Gangnam (±15-20 menit)", desc:"Langsung tanpa ganti jalur, satu kali naik subway.", tag:""},
       {time:"14:00", title:"Starfield Library (COEX Mall) 📚", desc:"Perpustakaan paling terkenal & instagramable di Seoul.", tag:"must", mapQ:"Starfield Library COEX"},
@@ -324,7 +321,7 @@ const packingItems = [
   "Hand cream / lip balm (udara gugur cenderung kering)",
   "Colokan: Korea 220V tipe C/F — sama dengan Indonesia, tapi cek kondisi charger",
   "Cash KRW secukupnya + kartu debit/travel card",
-  "Reservasi klinik (Reone Clinic) & cek jadwal antrian Mongtan sebelum berangkat",
+  "Reservasi klinik (Reone Clinic) sebelum berangkat",
 ];
 
 // ---------- STORAGE ----------
